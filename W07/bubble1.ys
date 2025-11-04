@@ -1,0 +1,73 @@
+	.pos 0
+	irmovq	stack,%rsp
+	call main
+	halt
+
+	.align 8
+array:
+	.quad 0xbca
+	.quad 0xcba
+	.quad 0xacb
+	.quad 0xcab
+	.quad 0xabc
+	.quad 0xbac
+	
+################################################################################
+# You may want to modify this portion
+
+bubble_a:
+	pushq %rbx
+	pushq %r13
+	irmovq $1, %r10
+	irmovq $8, %r9
+	rrmovq %rsi, %rax
+	subq %r10, %rax
+	jle L1
+	rrmovq %rdi, %r8
+	rrmovq %rax, %r11
+	addq %r11, %r11
+	addq %r11, %r11
+	addq %r11, %r11
+	addq %r11, %r8
+	jmp L6
+L4:
+	addq %r9,%rax
+	rrmovq %rax,%rbx
+	subq %rsi, %rbx
+	je L3
+L5:
+	mrmovq (%rax),%rcx
+	mrmovq 8(%rax),%rdx
+	rrmovq %rdx,%r13
+	subq %rcx,%r13
+	###############
+	jge L4
+	rmmovq %rcx,8(%rax)
+	rmmovq %rdx,(%rax)
+	###############
+	jmp L4
+L3:
+	subq %r9,%r8
+	rrmovq %rdi,%rbx
+	subq %r8,%rbx
+	je L1
+L6:
+	rrmovq %r8,%rsi
+	rrmovq %rdi,%rbx
+	subq %rsi,%rbx
+	je L3
+	rrmovq %rdi,%rax
+	jmp L5
+L1:
+	popq %r13
+	popq %rbx
+	ret
+
+main:
+	irmovq array, %rdi
+    irmovq $6, %rsi
+    call bubble_a
+    ret
+
+	.pos 0x200
+stack:
