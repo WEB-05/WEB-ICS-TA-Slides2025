@@ -2588,7 +2588,14 @@ layout: center
 # E6
 
 
-![image-20241017201625302](./newres/image/W12/27.png){.w-180}
+![image-20241017201625302](./newres/image/W12/55.png){.w-180}
+
+---
+
+# E6
+
+
+![image-20241017201625302](./newres/image/W12/56.png){.w-180}
 
 ---
 
