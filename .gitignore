@@ -8,3 +8,5 @@ slidev/*.local
 slidev/.vite-inspect
 slidev/.remote-assets
 slidev/components.d.ts
+
+labreview
